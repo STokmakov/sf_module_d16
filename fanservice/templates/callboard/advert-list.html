@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>Доска объявлений</h1>
+
+<hr>
+     {% if user.is_authenticated %}
+         <a href="{% url 'logout' %}">Logout</a>
+         <a href="create/">Создать</a>
+     {% for advert in object_list %}
+            <h2><a href="{{ advert.get_absolute_url }}">{{ advert.subject }}</a></h2>
+            <p>{{advert.created}}</p>
+            <hr>
+            <p> <a href="update/{{advert.id }}">Редактирование</a> </p>
+            <p> <a href="delete/{{advert.id }}">Удаление</a> </p>
+            <hr>
+     {% endfor %}
+     <h5><a href="/response/">Отклики</a></h5>
+
+
+<hr>
+
+<hr>
+
+     {% else %}
+         <a href="{% url 'login' %}">Login</a>
+         <a href="{% url 'register' %}">Register</a>
+<hr>
+
+<hr>
+     {% endif %}
+
+{% endblock content %}
